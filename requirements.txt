@@ -6,3 +6,4 @@ langchain-huggingface
 streamlit
 langchain-groq
 langchain-community
+langgraph

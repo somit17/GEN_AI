@@ -2,7 +2,7 @@ from dotenv import load_dotenv
 from langchain_groq import ChatGroq
 from langchain_community.utilities import  GoogleSerperAPIWrapper
 from langchain.agents import  create_agent
-
+from langgraph.checkpoint.memory import MemorySaver
 
 load_dotenv()
 llm = ChatGroq(
@@ -17,12 +17,14 @@ llm = ChatGroq(
 )
 
 search = GoogleSerperAPIWrapper()
+
 agent = create_agent(
                      model=llm,
                      tools=[search.run],
-                     system_prompt="You're an agent and can search anything on google"
+                     system_prompt="You're an agent and can search anything on google",
+                     checkpointer=MemorySaver()
                      )
-
+thread_config = {"configurable": {"thread_id": "1"}}
 while True:
     query = input("User : ")
 
@@ -30,7 +32,5 @@ while True:
         print("GoodBye ✌️!!")
         break
 
-    res = agent.invoke({'messages':[{
-                                    "role":"user","content":query
-                                    }]})
-    print(f"AI : {res['messages'][-1].content}")
+    res = agent.invoke({"messages":[{"role": "user", "content": query}]},thread_config)
+    print(res["messages"][-1].content)
