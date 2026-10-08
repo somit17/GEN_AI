@@ -1,3 +1,4 @@
+python-dotenv
 langchain
 langchain-openai
 dotenv
@@ -7,3 +8,4 @@ streamlit
 langchain-groq
 langchain-community
 langgraph
+pypdf
