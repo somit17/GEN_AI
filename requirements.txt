@@ -11,3 +11,4 @@ langgraph
 pypdf
 wikipedia
 langchain-text-splitters
+langchain-chroma
