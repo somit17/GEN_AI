@@ -12,3 +12,4 @@ pypdf
 wikipedia
 langchain-text-splitters
 langchain-chroma
+langchain_ollama
